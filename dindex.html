@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSentinel Dashboard</title>
+    <link rel="stylesheet" href="dstyle.css">
+    <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+        }
+
+        .login-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .login-box h2 {
+            margin: 0;
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #4CAF50;
+            outline: none;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .login-box button:hover {
+            background: #45a049;
+        }
+
+        .homepage {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .homepage-header {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .homepage-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #4CAF50;
+        }
+
+        .homepage-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .homepage-buttons button {
+            height: 200px;
+            background: #1f4037;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .homepage-buttons button:hover {
+            background: #4CAF50;
+            transform: scale(1.05);
+        }
+
+        .section {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .section div {
+            flex: 1;
+            background: #2a2a2a;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .section div h2 {
+            color: #4CAF50;
+        }
+
+        .contact-section, .awareness-section {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-section button, .awareness-section button {
+            background: #1f4037;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-section button:hover, .awareness-section button:hover {
+            background: #4CAF50;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .ai-icon-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .ai-icon {
+            width: 60px;  /* Adjust size of the icon */
+            height: 60px;
+            cursor: pointer;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .ai-icon:hover {
+            transform: scale(1.1);
+        }
+
+
+        .modal-content {
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            animation: popIn 0.5s ease;
+        }
+
+        .modal-content h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            margin: 0.5rem 0;
+        }
+
+        .modal-close {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+
+        .modal-close {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: #45a049;
+        }
+
+    </style>
+    <script>
+        function showHomePage() {
+            document.querySelector('.login-page').style.display = 'none';
+            document.querySelector('.homepage').style.display = 'block';
+        }
+
+        function detectThreat() {
+            const modal = document.getElementById('threat-modal');
+
+            const randomIP = `192.168.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+            const randomLocation = `Location-${Math.floor(Math.random() * 100)}`;
+            const randomDate = new Date().toLocaleDateString();
+            const randomTime = new Date().toLocaleTimeString();
+
+            document.getElementById('threat-ip').innerText = randomIP;
+            document.getElementById('threat-location').innerText = randomLocation;
+            document.getElementById('threat-date').innerText = randomDate;
+            document.getElementById('threat-time').innerText = randomTime;
+
+            modal.style.display = 'flex';
+
+            threatLogs.push(log);
+            alert('Threat detected! Check History Logs for details.');
+        }
+
+        function scamDetails() {
+            const modal = document.getElementById('scam-modal');
+
+            const randomMobile = `+91${Math.floor(9000000000 + Math.random() * 99999999)}`;
+            const randomAttempts = Math.floor(1 + Math.random() * 10);
+            const randomDuration = `${Math.floor(Math.random() * 5)}m ${Math.floor(Math.random() * 60)}s`;
+            const randomDate = new Date().toLocaleDateString();
+            const randomTime = new Date().toLocaleTimeString();
+
+            document.getElementById('scam-mobile').innerText = randomMobile;
+            document.getElementById('scam-attempts').innerText = randomAttempts;
+            document.getElementById('scam-duration').innerText = randomDuration;
+            document.getElementById('scam-date').innerText = randomDate;
+            document.getElementById('scam-time').innerText = randomTime;
+
+            modal.style.display = 'flex';
+
+            scamLogs.push(log);
+            alert('Scam call detected! Check History Logs for details.');
+        }
+
+        function phishingDetails() {
+            const modal = document.getElementById('phishing-modal');
+
+            const randomURL = `https://phish-site-${Math.floor(Math.random() * 1000)}.com`;
+            const randomDate = new Date().toLocaleDateString();
+            const randomTime = new Date().toLocaleTimeString();
+
+            document.getElementById('phishing-url').innerText = randomURL;
+            document.getElementById('phishing-date').innerText = randomDate;
+            document.getElementById('phishing-time').innerText = randomTime;
+
+            modal.style.display = 'flex';
+
+            phishingLogs.push(log);
+            alert('Phishing website detected! Check History Logs for details.');
+        }
+
+        function iotDeviceMonitor() {
+            const modal = document.getElementById('iot-modal');
+            
+            // Generate random IoT devices
+            const devices = ['Smart Light', 'Thermostat', 'Security Camera', 'Smart Door Lock', 'Smart Refrigerator'];
+            const deviceCount = Math.floor(Math.random() * devices.length) + 1;
+            const randomDevices = [];
+            for (let i = 0; i < deviceCount; i++) {
+                randomDevices.push(devices[Math.floor(Math.random() * devices.length)]);
+            }
+
+            // Generate random traffic
+            const traffic = Math.floor(Math.random() * 1000) + ' MB';
+            const riskScore = Math.floor(Math.random() * 100);
+
+            document.getElementById('device-list').innerText = randomDevices.join(', ');
+            document.getElementById('traffic').innerText = traffic;
+            document.getElementById('risk-score').innerText = riskScore;
+
+            modal.style.display = 'flex';
+
+            iotLogs.push(log);
+            alert('IoT security event detected! Check History Logs for details.');
+        }
+        function showHistoryLogs() {
+            let logsHtml = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Details</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            const allLogs = [...threatLogs, ...scamLogs, ...phishingLogs, ...iotLogs];
+
+            allLogs.forEach(log => {
+                logsHtml += `
+                    <tr>
+                        <td>${log.type}</td>
+                        <td>${log.type === 'Threat Detection' ? `IP: ${log.ip}, Location: ${log.location}` :
+                            log.type === 'Scam Call' ? `Mobile: ${log.mobile}, Attempts: ${log.attempts}, Duration: ${log.duration}` :
+                            log.type === 'Phishing Website' ? `URL: ${log.url}` :
+                            `Devices: ${log.devices}, Traffic: ${log.traffic}, Risk Score: ${log.riskScore}`}</td>
+                        <td>
+                            <button onclick="reportToCyberspace('${log.type}')">Report to Cyberspace</button>
+                            <button onclick="takeAction('${log.type}')">Take Action</button>
+                        </td>
+                    </tr>`;
+            });
+
+            logsHtml += `</tbody></table>`;
+
+            document.getElementById('history-modal-content').innerHTML = `
+                <h2>History Logs</h2>
+                ${logsHtml}
+                <button class="modal-close" onclick="closeModal('history-modal')">Close</button>
+            `;
+            document.getElementById('history-modal').style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+            function openChatBot() {
+                document.getElementById('chatbot-modal').style.display = 'flex';
+            }
+
+            function closeModal(modalId) {
+                document.getElementById(modalId).style.display = 'none';
+            }
+
+            function sendMessage() {
+                const userMessage = document.getElementById('user-message').value.trim();
+                if (!userMessage) return;
+
+                // Show user message in chat
+                const chatContainer = document.getElementById('chat-container');
+                const userMsg = `<div style="text-align: right; color: #4CAF50; margin: 10px 0;">You: ${userMessage}</div>`;
+                chatContainer.innerHTML += userMsg;
+
+                // Simulate AI Response
+                setTimeout(() => {
+                    const aiResponse = getAIResponse(userMessage); // Use predefined responses
+                    const aiMsg = `<div style="text-align: left; color: white; margin: 10px 0;">AI: ${aiResponse}</div>`;
+                    chatContainer.innerHTML += aiMsg;
+
+                    chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-scroll to bottom
+                }, 1000);
+
+                document.getElementById('user-message').value = ''; // Clear input field
+            }
+
+            function getAIResponse(message) {
+                // Simple responses for demonstration
+                const responses = {
+                    hello: "Hi there! How can I assist you today?",
+                    help: "Let me know what you need help with!",
+                    threat: "Check out the 'Threat Detection' feature for more details.",
+                    scam: "The 'Scam Call' feature provides insights about suspicious calls.",
+                };
+
+                const lowerMessage = message.toLowerCase();
+                for (const key in responses) {
+                    if (lowerMessage.includes(key)) return responses[key];
+                }
+
+                return "I’m here to help! Ask me anything.";
+            }
+
+
+    </script>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form onsubmit="event.preventDefault(); showHomePage();">
+                <input type="text" placeholder="User ID" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="homepage">
+        <div class="homepage-header">
+            <h1>Cyber Sentinel</h1>
+        </div>
+
+        <div class="homepage-buttons">
+            <button onclick="detectThreat()">Threat Detection</button>
+            <button onclick="scamDetails()">Scam Call</button>
+            <button onclick="phishingDetails()">Phishing Website</button>
+            <button onclick="iotDeviceMonitor()">IoT Security Monitor</button>
+            
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Total Threats Detected</h2>
+                <p>1325</p>
+            </div>
+            <div>
+                <div>
+                    <button onclick="window.location.href='history.html'"><h2>HISTORY LOGS</h2></button>
+                </div>
+               
+                <p>View detailed logs of all detected threats.</p>
+            </div>
+        </div>
+
+        
+        <div class="awareness-section">
+            <button onclick="window.location.href='article.html'">Cyber Awareness Articles</button>
+            
+
+            
+        </div>
+
+        <!-- AI Assistant Button (now an icon) -->
+         <div class="ai-icon-container">
+           <img src="ai-bot-icon.png" alt="AI Bot" class="ai-icon" onclick="openChatBot()">
+         </div>
+
+        
+        
+    </div>
+
+    <!-- Modals -->
+    <div id="threat-modal" class="modal">
+        <div class="modal-content">
+            <h2>Threat Detected</h2>
+            <p><strong>IP Address:</strong> <span id="threat-ip"></span></p>
+            <p><strong>Location:</strong> <span id="threat-location"></span></p>
+            <p><strong>Date:</strong> <span id="threat-date"></span></p>
+            <p><strong>Time:</strong> <span id="threat-time"></span></p>
+            <button class="modal-close" onclick="closeModal('threat-modal')">Close</button>
+        </div>
+    </div>
+
+    <div id="scam-modal" class="modal">
+        <div class="modal-content">
+            <h2>Scam Call Details</h2>
+            <p><strong>Mobile Number:</strong> <span id="scam-mobile"></span></p>
+            <p><strong>Number of Attempts:</strong> <span id="scam-attempts"></span></p>
+            <p><strong>Duration:</strong> <span id="scam-duration"></span></p>
+            <p><strong>Date:</strong> <span id="scam-date"></span></p>
+            <p><strong>Time:</strong> <span id="scam-time"></span></p>
+            <button class="modal-close" onclick="closeModal('scam-modal')">Close</button>
+        </div>
+    </div>
+
+    <div id="phishing-modal" class="modal">
+        <div class="modal-content">
+            <h2>Phishing Website Detected</h2>
+            <p><strong>URL:</strong> <span id="phishing-url"></span></p>
+            <p><strong>Date:</strong> <span id="phishing-date"></span></p>
+            <p><strong>Time:</strong> <span id="phishing-time"></span></p>
+            <button class="modal-close" onclick="closeModal('phishing-modal')">Close</button>
+        </div>
+    </div>
+
+    <!-- IoT Device Discovery Modal -->
+    <div id="iot-modal" class="modal">
+        <div class="modal-content">
+            <h2>Device Discovery and Inventory</h2>
+            <p><strong>Devices Detected:</strong> <span id="device-list"></span></p>
+            <p><strong>Traffic Detected:</strong> <span id="traffic"></span></p>
+            <p><strong>Risk Score:</strong> <span id="risk-score"></span></p>
+            <button class="modal-close" onclick="closeModal('iot-modal')">Close</button>
+        </div>
+    </div>
+
+</body>
+</html>

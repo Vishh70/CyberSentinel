@@ -1,0 +1,75 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: white;
+    overflow-x: hidden;
+}
+
+.header {
+    text-align: center;
+    padding: 2rem;
+    background: #1f4037;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #4CAF50;
+}
+
+.articles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.article-card {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, background 0.3s;
+    cursor: pointer;
+}
+
+.article-card:hover {
+    transform: scale(1.05);
+    background: #1f4037;
+}
+
+.article-card h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #4CAF50;
+}
+
+.article-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.back-button {
+    display: block;
+    width: 200px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 1rem;
+    background: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.back-button:hover {
+    transform: scale(1.05);
+    background: #45a049;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Logs</title>
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+    <div class="container">
+        <h1>History Logs</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Log Type</th>
+                    <th>Description</th>
+                    <th>Date & Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Phishing Website</td>
+                    <td>Detected malicious URL: example.com</td>
+                    <td>2025-01-12 14:32</td>
+                    <td>
+                        <button onclick="reportCyberTeam()">Report to Cyber Team</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IoT Security Monitor</td>
+                    <td>Unauthorized access detected on Device #45</td>
+                    <td>2025-01-12 15:12</td>
+                    <td>
+                        <button onclick="reportCyberTeam()">Report to Cyber Team</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Threat Detection</td>
+                    <td>Potential ransomware detected on Server #8</td>
+                    <td>2025-01-12 16:45</td>
+                    <td>
+                        <button onclick="reportCyberTeam()">Report to Cyber Team</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+    <script src="history.js"></script>
+</body>
+</html>
